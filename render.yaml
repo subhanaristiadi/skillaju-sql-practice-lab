@@ -1,0 +1,21 @@
+# Runtime deployment is managed directly through Render. This Blueprint is a
+# reproducible alternative; do not create a second service for the same app.
+services:
+  - type: web
+    name: skillaju-sql-practice-lab
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 35
+    healthCheckPath: /ready
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: REQUIRE_NON_SUPERUSER
+        value: 'true'
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://subhanaristiadi.github.io
+      - key: PYTHON_VERSION
+        value: '3.13.5'

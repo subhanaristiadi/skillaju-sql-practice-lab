@@ -1,0 +1,17 @@
+.reference/
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.local/
+dist/
+*.log
+.agents/
+.codex/
+.aws/
+# Original learner records stay local and in the private Neon source tables.
+/*.csv
+

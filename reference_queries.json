@@ -1,0 +1,527 @@
+{
+  "EXE-01": {
+    "sql": "SELECT (SELECT COUNT(*) FROM students) AS students,(SELECT COUNT(*) FROM enrollments) AS enrollments,(SELECT COUNT(*) FROM courses) AS courses,(SELECT COUNT(*) FROM instructors) AS instructors,(SELECT COUNT(*) FROM quiz_results) AS quiz_attempts;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "EXE-02": {
+    "sql": "SELECT DATE_TRUNC('month',enrolled_date)::date AS month,COUNT(*) AS enrollments FROM enrollments GROUP BY 1 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "EXE-03": {
+    "sql": "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "EXE-04": {
+    "sql": "WITH outcomes AS (\n SELECT 'plan_type' AS dimension,s.plan_type AS segment,e.completion_pct FROM enrollments e JOIN students s USING(student_id)\n UNION ALL SELECT 'acquisition_source',s.acquisition_source,e.completion_pct FROM enrollments e JOIN students s USING(student_id)\n UNION ALL SELECT 'city',s.city,e.completion_pct FROM enrollments e JOIN students s USING(student_id)\n UNION ALL SELECT 'category',c.category,e.completion_pct FROM enrollments e JOIN courses c USING(course_id)\n UNION ALL SELECT 'level',c.level,e.completion_pct FROM enrollments e JOIN courses c USING(course_id)\n), rates AS (SELECT dimension,segment,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM outcomes GROUP BY 1,2)\n SELECT dimension,MIN(completion_rate_pct) AS lowest_completion_pct,MAX(completion_rate_pct) AS highest_completion_pct,MAX(completion_rate_pct)-MIN(completion_rate_pct) AS gap_pp FROM rates GROUP BY dimension ORDER BY gap_pp DESC,dimension;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "EXE-05": {
+    "sql": "SELECT c.category,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments e JOIN courses c USING(course_id) GROUP BY c.category ORDER BY completion_rate_pct DESC,c.category;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-01": {
+    "sql": "SELECT acquisition_source,COUNT(*) AS students FROM students GROUP BY acquisition_source ORDER BY students DESC,acquisition_source;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-02": {
+    "sql": "SELECT s.acquisition_source,COUNT(*) AS enrollments FROM enrollments e JOIN students s USING(student_id) GROUP BY s.acquisition_source ORDER BY enrollments DESC,s.acquisition_source;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-03": {
+    "sql": "SELECT acquisition_source,COUNT(*) AS enrollments,COUNT(DISTINCT student_id) AS learners,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments JOIN students USING(student_id) GROUP BY acquisition_source ORDER BY enrollments DESC,acquisition_source;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-04": {
+    "sql": "SELECT plan_type,COUNT(*) AS enrollments,COUNT(DISTINCT student_id) AS learners,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments JOIN students USING(student_id) GROUP BY plan_type ORDER BY enrollments DESC,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-05": {
+    "sql": "SELECT s.city,COUNT(DISTINCT s.student_id) AS students,COUNT(e.enrollment_id) AS enrollments FROM students s LEFT JOIN enrollments e USING(student_id) GROUP BY s.city ORDER BY students DESC,s.city;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-06": {
+    "sql": "SELECT CASE WHEN s.age<25 THEN '18-24' WHEN s.age<35 THEN '25-34' ELSE '35-45' END AS age_group,c.category,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM enrollments e JOIN students s USING(student_id) JOIN courses c USING(course_id) GROUP BY 1,2 ORDER BY 1,2;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-07": {
+    "sql": "WITH segment_perf AS (\n SELECT s.acquisition_source,s.plan_type,COUNT(*) AS enrollments,\n        COUNT(DISTINCT s.student_id) AS learners,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.completion_pct=100)/COUNT(*),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.certificate_issued)/COUNT(*),2) AS certification_rate_pct\n FROM enrollments e JOIN students s USING(student_id)\n GROUP BY s.acquisition_source,s.plan_type\n) SELECT acquisition_source,plan_type,enrollments,learners,completion_rate_pct,certification_rate_pct FROM segment_perf WHERE enrollments>=30 ORDER BY completion_rate_pct DESC,certification_rate_pct DESC,acquisition_source,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "ACQ-08": {
+    "sql": "WITH segment_perf AS (\n SELECT s.acquisition_source,s.plan_type,COUNT(*) AS enrollments,\n        COUNT(DISTINCT s.student_id) AS learners,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.completion_pct=100)/COUNT(*),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.certificate_issued)/COUNT(*),2) AS certification_rate_pct\n FROM enrollments e JOIN students s USING(student_id)\n GROUP BY s.acquisition_source,s.plan_type\n) SELECT acquisition_source,plan_type,enrollments,learners,avg_completion_pct,completion_rate_pct FROM segment_perf WHERE enrollments>(SELECT AVG(enrollments) FROM segment_perf) AND completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM segment_perf) ORDER BY enrollments DESC,acquisition_source,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-01": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments FROM course_perf WHERE status='published' ORDER BY enrollments DESC,course_id LIMIT 10;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-02": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments FROM course_perf WHERE status='published' ORDER BY enrollments,course_id LIMIT 10;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-03": {
+    "sql": "SELECT c.category,COUNT(*) AS enrollments,COUNT(DISTINCT e.student_id) AS learners FROM enrollments e JOIN courses c USING(course_id) WHERE c.status='published' GROUP BY c.category ORDER BY learners DESC,c.category;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-04": {
+    "sql": "SELECT c.level,COUNT(*) AS enrollments,COUNT(DISTINCT e.student_id) AS learners FROM enrollments e JOIN courses c USING(course_id) WHERE c.status='published' GROUP BY c.level ORDER BY enrollments DESC,c.level;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-05": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,price_idr,duration_hours,enrollments FROM course_perf WHERE status='published' ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-06": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,avg_rating FROM course_perf WHERE status='published' AND enrollments>(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND avg_rating<(SELECT AVG(avg_rating) FROM course_perf WHERE status='published') ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-07": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,avg_rating FROM course_perf WHERE status='published' AND enrollments<(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND avg_rating>(SELECT AVG(avg_rating) FROM course_perf WHERE status='published') ORDER BY avg_rating DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-08": {
+    "sql": "SELECT status,COUNT(*) AS courses,ROUND(AVG(price_idr),2) AS avg_price_idr,ROUND(AVG(duration_hours),2) AS avg_duration_hours,ROUND(AVG(avg_rating),2) AS avg_rating FROM courses GROUP BY status ORDER BY status;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-09": {
+    "sql": "SELECT category,level,COUNT(*) AS courses,ROUND(100.0*COUNT(*)/SUM(COUNT(*)) OVER(),2) AS catalog_share_pct FROM courses GROUP BY category,level ORDER BY courses DESC,category,level;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CAT-10": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,avg_rating,completion_rate_pct,CASE WHEN completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') THEN 'improve completion' WHEN avg_rating<(SELECT AVG(avg_rating) FROM course_perf WHERE status='published') THEN 'review content' ELSE 'promotion candidate' END AS recommendation FROM course_perf WHERE status='published' ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-01": {
+    "sql": "SELECT COUNT(*) AS enrollments,COUNT(*) FILTER(WHERE completion_pct=100) AS completed_enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM enrollments;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-02": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,completion_rate_pct FROM course_perf WHERE enrollments>0 ORDER BY completion_rate_pct DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-03": {
+    "sql": "SELECT c.category,c.level,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM enrollments e JOIN courses c USING(course_id) GROUP BY c.category,c.level ORDER BY completion_rate_pct DESC,c.category,c.level;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-04": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,completion_rate_pct FROM course_perf WHERE status='published' AND enrollments>(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-05": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,completion_rate_pct FROM course_perf WHERE status='published' AND enrollments<(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND completion_rate_pct>(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') ORDER BY completion_rate_pct DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-06": {
+    "sql": "SELECT COUNT(*) AS dated_completions,ROUND(AVG(completion_date-enrolled_date),2) AS avg_days_to_complete,PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY completion_date-enrolled_date) AS median_days_to_complete FROM enrollments WHERE completion_pct=100 AND completion_date IS NOT NULL AND completion_date>=enrolled_date;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-07": {
+    "sql": "SELECT plan_type,COUNT(*) AS enrollments,COUNT(DISTINCT student_id) AS learners,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments JOIN students USING(student_id) GROUP BY plan_type ORDER BY enrollments DESC,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-08": {
+    "sql": "SELECT acquisition_source,COUNT(*) AS enrollments,COUNT(DISTINCT student_id) AS learners,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments JOIN students USING(student_id) GROUP BY acquisition_source ORDER BY enrollments DESC,acquisition_source;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-09": {
+    "sql": "SELECT city,COUNT(*) AS enrollments,COUNT(DISTINCT student_id) AS learners,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct,ROUND(AVG(completion_pct),2) AS avg_completion_pct FROM enrollments JOIN students USING(student_id) GROUP BY city ORDER BY enrollments DESC,city;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "CMP-10": {
+    "sql": "SELECT s.plan_type,c.category,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM enrollments e JOIN students s USING(student_id) JOIN courses c USING(course_id) GROUP BY s.plan_type,c.category HAVING COUNT(*)>=30 ORDER BY completion_rate_pct,s.plan_type,c.category;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-01": {
+    "sql": "SELECT COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-02": {
+    "sql": "SELECT c.course_id,c.title,COUNT(*) AS attempts,ROUND(AVG(q.score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE q.passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results q JOIN courses c USING(course_id) GROUP BY c.course_id,c.title ORDER BY pass_rate_pct,c.course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-03": {
+    "sql": "SELECT quiz_number,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results GROUP BY quiz_number ORDER BY pass_rate_pct,quiz_number;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-04": {
+    "sql": "SELECT quiz_number,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results GROUP BY quiz_number ORDER BY quiz_number;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-05": {
+    "sql": "SELECT COUNT(*) AS attempts,COUNT(*) FILTER(WHERE attempt_number>1) AS retry_attempts,ROUND(100.0*COUNT(*) FILTER(WHERE attempt_number>1)/COUNT(*),2) AS retry_rate_pct,COUNT(DISTINCT student_id) FILTER(WHERE attempt_number>1) AS retrying_learners FROM quiz_results;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-06": {
+    "sql": "WITH first_attempt AS (SELECT enrollment_id,quiz_number,AVG(score) AS first_score FROM quiz_results WHERE attempt_number=1 GROUP BY 1,2),later AS (SELECT enrollment_id,quiz_number,AVG(score) AS later_score FROM quiz_results WHERE attempt_number>1 GROUP BY 1,2) SELECT COUNT(*) AS retried_quizzes,ROUND(AVG(later_score-first_score),2) AS avg_score_change FROM first_attempt JOIN later USING(enrollment_id,quiz_number);",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-07": {
+    "sql": "SELECT CASE WHEN attempt_number=1 THEN 'first attempt' ELSE 'retry' END AS attempt_group,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results GROUP BY 1 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-08": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), quiz_perf AS (\n SELECT course_id,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,\n        ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct\n FROM quiz_results GROUP BY course_id\n) SELECT c.course_id,c.title,c.enrollments,c.completion_rate_pct,q.attempts,q.avg_score,q.pass_rate_pct FROM course_perf c JOIN quiz_perf q USING(course_id) WHERE c.status='published' AND c.completion_rate_pct>(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') AND q.pass_rate_pct<(SELECT AVG(pass_rate_pct) FROM quiz_perf JOIN courses USING(course_id) WHERE status='published') ORDER BY c.course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-09": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), quiz_perf AS (\n SELECT course_id,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,\n        ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct\n FROM quiz_results GROUP BY course_id\n) SELECT c.course_id,c.title,c.enrollments,c.completion_rate_pct,q.attempts,q.avg_score,q.pass_rate_pct FROM course_perf c JOIN quiz_perf q USING(course_id) WHERE c.status='published' AND c.completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') AND q.pass_rate_pct>(SELECT AVG(pass_rate_pct) FROM quiz_perf JOIN courses USING(course_id) WHERE status='published') ORDER BY c.course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "QIZ-10": {
+    "sql": "WITH quiz_perf AS (SELECT quiz_number,COUNT(*) AS attempts,ROUND(AVG(score),2) AS avg_score,ROUND(100.0*COUNT(*) FILTER(WHERE passed)/COUNT(*),2) AS pass_rate_pct FROM quiz_results GROUP BY quiz_number) SELECT quiz_number,attempts,avg_score,pass_rate_pct FROM quiz_perf WHERE pass_rate_pct<(SELECT AVG(pass_rate_pct) FROM quiz_perf) ORDER BY pass_rate_pct,quiz_number;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-01": {
+    "sql": "SELECT instructor_id,name,avg_rating FROM instructors ORDER BY avg_rating DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-02": {
+    "sql": "SELECT i.instructor_id,i.name,COUNT(c.course_id) AS courses FROM instructors i LEFT JOIN courses c USING(instructor_id) GROUP BY i.instructor_id,i.name ORDER BY courses DESC,i.instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-03": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,courses,enrollments FROM instructor_perf ORDER BY enrollments DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-04": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,avg_rating,courses,enrollments FROM instructor_perf ORDER BY avg_rating DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-05": {
+    "sql": "SELECT i.expertise,COUNT(DISTINCT c.course_id) AS courses,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct FROM enrollments e JOIN courses c USING(course_id) JOIN instructors i USING(instructor_id) GROUP BY i.expertise ORDER BY enrollments DESC,i.expertise;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-06": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,enrollments,completion_rate_pct FROM instructor_perf WHERE enrollments>0 ORDER BY completion_rate_pct DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-07": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,avg_rating,courses,enrollments FROM instructor_perf WHERE avg_rating>(SELECT AVG(avg_rating) FROM instructor_perf) AND enrollments<(SELECT AVG(enrollments) FROM instructor_perf) ORDER BY avg_rating DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "INS-08": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,courses,enrollments,completion_rate_pct,CASE WHEN courses=0 THEN 'capacity opportunity' WHEN completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM instructor_perf) THEN 'content support' WHEN courses>(SELECT AVG(courses) FROM instructor_perf) THEN 'capacity review' ELSE 'monitor' END AS recommendation FROM instructor_perf ORDER BY instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-01": {
+    "sql": "SELECT c.price_idr,COUNT(*) AS enrollments FROM enrollments e JOIN courses c USING(course_id) WHERE c.status='published' GROUP BY c.price_idr ORDER BY c.price_idr;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-02": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,price_idr,enrollments,potential_booking_value_idr FROM course_perf WHERE status='published' ORDER BY potential_booking_value_idr DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-03": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT category,SUM(enrollments) AS enrollments,SUM(potential_booking_value_idr) AS potential_booking_value_idr FROM course_perf WHERE status='published' GROUP BY category ORDER BY potential_booking_value_idr DESC,category;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-04": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT price_idr,COUNT(*) AS courses,SUM(enrollments) AS enrollments,ROUND(AVG(enrollments),2) AS avg_enrollments_per_course FROM course_perf WHERE status='published' GROUP BY price_idr ORDER BY price_idr;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-05": {
+    "sql": "WITH outcomes AS (SELECT c.price_idr,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct FROM enrollments e JOIN courses c USING(course_id) WHERE c.status='published' GROUP BY c.price_idr),quiz AS (SELECT c.price_idr,ROUND(AVG(q.score),2) AS avg_quiz_score,ROUND(100.0*COUNT(*) FILTER(WHERE q.passed)/COUNT(*),2) AS quiz_pass_rate_pct FROM quiz_results q JOIN courses c USING(course_id) WHERE c.status='published' GROUP BY c.price_idr) SELECT o.price_idr,o.enrollments,o.completion_rate_pct,q.avg_quiz_score,q.quiz_pass_rate_pct FROM outcomes o LEFT JOIN quiz q USING(price_idr) ORDER BY o.price_idr;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-06": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,avg_rating,potential_booking_value_idr FROM course_perf WHERE status='published' AND enrollments>(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND avg_rating>(SELECT AVG(avg_rating) FROM course_perf WHERE status='published') AND potential_booking_value_idr>(SELECT AVG(potential_booking_value_idr) FROM course_perf WHERE status='published') ORDER BY potential_booking_value_idr DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "PRC-07": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,price_idr,enrollments,avg_rating,completion_rate_pct FROM course_perf WHERE status='published' AND price_idr>(SELECT AVG(price_idr) FROM course_perf WHERE status='published') AND enrollments<(SELECT AVG(enrollments) FROM course_perf WHERE status='published') ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-01": {
+    "sql": "SELECT DATE_TRUNC('month',enrolled_date)::date AS enrollment_cohort,COUNT(*) AS enrollments,ROUND(100.0 * COUNT(*) FILTER (WHERE completion_pct = 100) / NULLIF(COUNT(*),0),2) AS completion_rate_pct,ROUND(100.0 * COUNT(*) FILTER (WHERE certificate_issued) / NULLIF(COUNT(*),0),2) AS certification_rate_pct FROM enrollments GROUP BY 1 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-02": {
+    "sql": "SELECT DATE_TRUNC('year',s.registration_date)::date AS registration_cohort,COUNT(DISTINCT s.student_id) AS students,COUNT(e.enrollment_id) AS enrollments,ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct FROM students s LEFT JOIN enrollments e USING(student_id) GROUP BY 1 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-03": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT DATE_TRUNC('year',created_date)::date AS creation_year,status,COUNT(*) AS courses,ROUND(AVG(enrollments),2) AS avg_enrollments_per_course FROM course_perf GROUP BY 1,2 ORDER BY 1,2;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-04": {
+    "sql": "WITH activity AS (SELECT EXTRACT(MONTH FROM enrolled_date)::integer AS month_of_year,COUNT(*) AS enrollments,0::bigint AS quiz_attempts FROM enrollments GROUP BY 1 UNION ALL SELECT EXTRACT(MONTH FROM attempt_date)::integer,0::bigint,COUNT(*) FROM quiz_results GROUP BY 1) SELECT month_of_year,SUM(enrollments) AS enrollments,SUM(quiz_attempts) AS quiz_attempts FROM activity GROUP BY month_of_year ORDER BY month_of_year;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-05": {
+    "sql": "WITH anchor AS (SELECT MAX(last_accessed) AS as_of_date FROM enrollments) SELECT DATE_TRUNC('month',e.enrolled_date)::date AS enrollment_cohort,a.as_of_date,COUNT(*) AS enrollments,ROUND(AVG(a.as_of_date-e.last_accessed),2) AS avg_days_since_access FROM enrollments e CROSS JOIN anchor a GROUP BY 1,2 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "COH-06": {
+    "sql": "WITH anchor AS (SELECT MAX(last_accessed) AS as_of_date FROM enrollments) SELECT DATE_TRUNC('month',e.enrolled_date)::date AS enrollment_cohort,a.as_of_date,COUNT(*) AS enrollments,COUNT(*) FILTER(WHERE e.completion_pct<100 AND a.as_of_date-e.last_accessed>90) AS at_risk_enrollments,ROUND(100.0*COUNT(*) FILTER(WHERE e.completion_pct<100 AND a.as_of_date-e.last_accessed>90)/COUNT(*),2) AS at_risk_rate_pct FROM enrollments e CROSS JOIN anchor a GROUP BY 1,2 ORDER BY 1;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "RSK-01": {
+    "sql": "SELECT COUNT(*) AS enrollments,COUNT(*) FILTER(WHERE completion_pct<25) AS low_completion_enrollments,ROUND(100.0*COUNT(*) FILTER(WHERE completion_pct<25)/COUNT(*),2) AS low_completion_rate_pct FROM enrollments;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "RSK-02": {
+    "sql": "SELECT c.course_id,c.title,COUNT(*) AS partially_completed_enrollments FROM enrollments e JOIN courses c USING(course_id) WHERE e.completion_pct>0 AND e.completion_pct<100 GROUP BY c.course_id,c.title ORDER BY partially_completed_enrollments DESC,c.course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "RSK-03": {
+    "sql": "WITH segment_perf AS (\n SELECT s.acquisition_source,s.plan_type,COUNT(*) AS enrollments,\n        COUNT(DISTINCT s.student_id) AS learners,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.completion_pct=100)/COUNT(*),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.certificate_issued)/COUNT(*),2) AS certification_rate_pct\n FROM enrollments e JOIN students s USING(student_id)\n GROUP BY s.acquisition_source,s.plan_type\n) SELECT acquisition_source,plan_type,enrollments,learners,avg_completion_pct,completion_rate_pct FROM segment_perf WHERE enrollments>=30 ORDER BY completion_rate_pct,acquisition_source,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "RSK-04": {
+    "sql": "WITH anchor AS (SELECT MAX(last_accessed) AS as_of_date FROM enrollments) SELECT a.as_of_date,(e.completion_pct<100 AND a.as_of_date-e.last_accessed>90) AS at_risk_proxy,COUNT(*) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,ROUND(AVG(e.completion_pct),2) AS avg_completion_pct FROM enrollments e CROSS JOIN anchor a GROUP BY 1,2 ORDER BY at_risk_proxy DESC;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "RSK-05": {
+    "sql": "WITH anchor AS (SELECT MAX(last_accessed) AS as_of_date FROM enrollments) SELECT c.course_id,c.title,s.acquisition_source,s.plan_type,COUNT(*) AS at_risk_enrollments FROM enrollments e JOIN students s USING(student_id) JOIN courses c USING(course_id) CROSS JOIN anchor a WHERE e.completion_pct<100 AND a.as_of_date-e.last_accessed>90 GROUP BY c.course_id,c.title,s.acquisition_source,s.plan_type ORDER BY at_risk_enrollments DESC,c.course_id,s.acquisition_source,s.plan_type LIMIT 100;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-01": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT category,SUM(enrollments) AS enrollments,ROUND(100.0*SUM(completed_enrollments)/NULLIF(SUM(enrollments),0),2) AS completion_rate_pct,SUM(potential_booking_value_idr) AS potential_booking_value_idr FROM course_perf WHERE status='published' GROUP BY category ORDER BY completion_rate_pct DESC,enrollments DESC,category;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-02": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,avg_rating,completion_rate_pct FROM course_perf WHERE status='published' AND enrollments>(SELECT AVG(enrollments) FROM course_perf WHERE status='published') AND (completion_rate_pct<(SELECT AVG(completion_rate_pct) FROM course_perf WHERE status='published') OR avg_rating<(SELECT AVG(avg_rating) FROM course_perf WHERE status='published')) ORDER BY enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-03": {
+    "sql": "WITH segment_perf AS (\n SELECT s.acquisition_source,s.plan_type,COUNT(*) AS enrollments,\n        COUNT(DISTINCT s.student_id) AS learners,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.completion_pct=100)/COUNT(*),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(*) FILTER(WHERE e.certificate_issued)/COUNT(*),2) AS certification_rate_pct\n FROM enrollments e JOIN students s USING(student_id)\n GROUP BY s.acquisition_source,s.plan_type\n) SELECT acquisition_source,plan_type,enrollments,completion_rate_pct,certification_rate_pct,CASE WHEN completion_rate_pct>=(SELECT AVG(completion_rate_pct) FROM segment_perf) THEN 'acquisition candidate' ELSE 'retention support' END AS recommendation FROM segment_perf WHERE enrollments>=30 ORDER BY acquisition_source,plan_type;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-04": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n) SELECT course_id,title,enrollments,completion_rate_pct,enrollments-completed_enrollments AS incomplete_enrollments FROM course_perf WHERE status='published' ORDER BY incomplete_enrollments DESC,course_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-05": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), instructor_perf AS (\n SELECT i.instructor_id,i.name,i.expertise,i.avg_rating,COUNT(c.course_id) AS courses,\n        COALESCE(SUM(c.enrollments),0) AS enrollments,\n        ROUND(100.0*SUM(c.completed_enrollments)/NULLIF(SUM(c.enrollments),0),2) AS completion_rate_pct\n FROM instructors i LEFT JOIN course_perf c USING(instructor_id)\n GROUP BY i.instructor_id,i.name,i.expertise,i.avg_rating\n) SELECT instructor_id,name,expertise,avg_rating,enrollments,completion_rate_pct FROM instructor_perf WHERE avg_rating>=(SELECT AVG(avg_rating) FROM instructor_perf) AND completion_rate_pct>=(SELECT AVG(completion_rate_pct) FROM instructor_perf) ORDER BY enrollments DESC,instructor_id;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  },
+  "STR-06": {
+    "sql": "WITH course_perf AS (\n SELECT c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,\n        c.duration_hours,c.avg_rating,c.created_date,\n        COUNT(e.enrollment_id) AS enrollments,COUNT(DISTINCT e.student_id) AS learners,\n        COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100) AS completed_enrollments,\n        ROUND(AVG(e.completion_pct),2) AS avg_completion_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.completion_pct=100)/NULLIF(COUNT(e.enrollment_id),0),2) AS completion_rate_pct,\n        ROUND(100.0*COUNT(e.enrollment_id) FILTER(WHERE e.certificate_issued)/NULLIF(COUNT(e.enrollment_id),0),2) AS certification_rate_pct,\n        c.price_idr::bigint*COUNT(e.enrollment_id) AS potential_booking_value_idr\n FROM courses c LEFT JOIN enrollments e USING(course_id)\n GROUP BY c.course_id,c.title,c.category,c.level,c.status,c.instructor_id,c.price_idr,c.duration_hours,c.avg_rating,c.created_date\n), ranked AS (\n SELECT course_id,title,enrollments,completion_rate_pct,ROW_NUMBER() OVER(ORDER BY enrollments DESC,course_id) AS demand_rank,\n ROW_NUMBER() OVER(ORDER BY completion_rate_pct,course_id) AS completion_rank FROM course_perf WHERE status='published' AND enrollments>0\n), action_evidence AS (\n SELECT 1 AS priority,'Improve completion' AS action,title AS target,enrollments AS affected_enrollments FROM ranked WHERE completion_rank=1\n UNION ALL SELECT 2,'Review high-demand content',title,enrollments FROM ranked WHERE demand_rank=1\n UNION ALL SELECT 3,'Re-engage inactive enrollments','Incomplete; last access >90 days before dataset anchor',COUNT(*) FROM enrollments CROSS JOIN (SELECT MAX(last_accessed) AS as_of_date FROM enrollments) a WHERE completion_pct<100 AND a.as_of_date-last_accessed>90\n) SELECT priority,action,target,affected_enrollments FROM action_evidence ORDER BY priority;",
+    "policy": {
+      "compare_column_names": true,
+      "order_matters": false
+    }
+  }
+}

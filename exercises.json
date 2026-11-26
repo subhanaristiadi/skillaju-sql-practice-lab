@@ -1,0 +1,2048 @@
+[
+  {
+    "id": "EXE-01",
+    "topic": "Executive Performance",
+    "title": "Dataset inventory",
+    "difficulty": "Beginner",
+    "business_question": "How many students, enrollments, courses, instructors, and quiz attempts are in the dataset?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors",
+      "quiz_results",
+      "students"
+    ],
+    "analytical_grain": "One dataset snapshot",
+    "expected_output": [
+      "students",
+      "enrollments",
+      "courses",
+      "instructors",
+      "quiz_attempts"
+    ],
+    "learning_objectives": [
+      "Executive Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "1.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "EXE-02",
+    "topic": "Executive Performance",
+    "title": "Monthly enrollment trend",
+    "difficulty": "Beginner",
+    "business_question": "How has enrollment volume changed over time?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One calendar month",
+    "expected_output": [
+      "month",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Executive Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "1.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "EXE-03",
+    "topic": "Executive Performance",
+    "title": "Overall learning outcomes",
+    "difficulty": "Beginner",
+    "business_question": "What are the overall completion, certification, and average completion rates?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One dataset snapshot",
+    "expected_output": [
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Executive Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "1.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "EXE-04",
+    "topic": "Executive Performance",
+    "title": "Dimensions with the largest outcome gaps",
+    "difficulty": "Advanced",
+    "business_question": "Which dimensions explain the largest differences in learning outcomes?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One dimension",
+    "expected_output": [
+      "dimension",
+      "lowest_completion_pct",
+      "highest_completion_pct",
+      "gap_pp"
+    ],
+    "learning_objectives": [
+      "Executive Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Compare completion-rate range across plan, source, city, category and level.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "1.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "EXE-05",
+    "topic": "Executive Performance",
+    "title": "Platform strengths and weaknesses",
+    "difficulty": "Intermediate",
+    "business_question": "Which areas of the platform appear strongest and weakest?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One course category",
+    "expected_output": [
+      "category",
+      "enrollments",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Executive Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Use the category scorecard as evidence; discuss strengths and weaknesses in personal notes.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "1.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-01",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Registered students by acquisition source",
+    "difficulty": "Beginner",
+    "business_question": "Which acquisition sources generate the most registered students?",
+    "required_tables": [
+      "students"
+    ],
+    "analytical_grain": "One acquisition source",
+    "expected_output": [
+      "acquisition_source",
+      "students"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-02",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Enrollments by acquisition source",
+    "difficulty": "Beginner",
+    "business_question": "Which acquisition sources generate the most enrollments?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source",
+    "expected_output": [
+      "acquisition_source",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-03",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Learning outcomes by acquisition source",
+    "difficulty": "Intermediate",
+    "business_question": "Which acquisition sources are associated with higher completion and certification rates?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source",
+    "expected_output": [
+      "acquisition_source",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-04",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Learning outcomes by learner plan",
+    "difficulty": "Intermediate",
+    "business_question": "How do outcomes differ by `plan_type` (free, basic, pro)?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One plan type",
+    "expected_output": [
+      "plan_type",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-05",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Students and enrollments by city",
+    "difficulty": "Intermediate",
+    "business_question": "Which cities contribute the most students and enrollments?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One student city",
+    "expected_output": [
+      "city",
+      "students",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-06",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Age groups, course choice and completion",
+    "difficulty": "Intermediate",
+    "business_question": "Do learner age groups differ in course choice or completion?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One age group × category",
+    "expected_output": [
+      "age_group",
+      "category",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Age bands: 18–24, 25–34, 35–45.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-07",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Strongest acquisition source and plan combinations",
+    "difficulty": "Intermediate",
+    "business_question": "Which acquisition source × plan combinations appear strongest?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source × plan",
+    "expected_output": [
+      "acquisition_source",
+      "plan_type",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; rank by completion then certification.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "ACQ-08",
+    "topic": "Learner Acquisition & Segmentation",
+    "title": "Active but under-completing learner segments",
+    "difficulty": "Advanced",
+    "business_question": "Are some learner segments highly active but under-completing?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source × plan",
+    "expected_output": [
+      "acquisition_source",
+      "plan_type",
+      "enrollments",
+      "learners",
+      "avg_completion_pct",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learner Acquisition & Segmentation",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Active proxy = above-mean enrollment count; under-completing = below-mean segment completion rate. Activity frequency is unavailable.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "2.8",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-01",
+    "topic": "Course Demand & Catalog",
+    "title": "Most popular courses",
+    "difficulty": "Beginner",
+    "business_question": "Which courses have the most enrollments?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Rank the top 10 by recorded enrollments; break ties by course_id.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-02",
+    "topic": "Course Demand & Catalog",
+    "title": "Least popular courses",
+    "difficulty": "Beginner",
+    "business_question": "Which courses have the fewest enrollments?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Bottom 10 published courses including zero enrollments; break ties by course_id.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-03",
+    "topic": "Course Demand & Catalog",
+    "title": "Learner demand by category",
+    "difficulty": "Intermediate",
+    "business_question": "Which categories attract the most learners?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course category",
+    "expected_output": [
+      "category",
+      "enrollments",
+      "learners"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-04",
+    "topic": "Course Demand & Catalog",
+    "title": "Demand by course level",
+    "difficulty": "Intermediate",
+    "business_question": "How does demand differ by course level?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course level",
+    "expected_output": [
+      "level",
+      "enrollments",
+      "learners"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-05",
+    "topic": "Course Demand & Catalog",
+    "title": "Price, duration and course demand",
+    "difficulty": "Intermediate",
+    "business_question": "How do price and duration relate to enrollment volume?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "price_idr",
+      "duration_hours",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Compare course-level listed price, duration and recorded enrollments; discuss associations in notes.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-06",
+    "topic": "Course Demand & Catalog",
+    "title": "High-demand courses with low ratings",
+    "difficulty": "Intermediate",
+    "business_question": "Which published courses have high demand but relatively low ratings?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "avg_rating"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-07",
+    "topic": "Course Demand & Catalog",
+    "title": "Highly rated courses with low demand",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses have high ratings but low demand?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "avg_rating"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-08",
+    "topic": "Course Demand & Catalog",
+    "title": "Draft versus published catalog attributes",
+    "difficulty": "Intermediate",
+    "business_question": "Are draft courses materially different from published courses in observable catalog attributes?",
+    "required_tables": [
+      "courses"
+    ],
+    "analytical_grain": "One course status",
+    "expected_output": [
+      "status",
+      "courses",
+      "avg_price_idr",
+      "avg_duration_hours",
+      "avg_rating"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include both draft and published courses. Attribute differences alone do not establish causation.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.8",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-09",
+    "topic": "Course Demand & Catalog",
+    "title": "Catalog representation by category and level",
+    "difficulty": "Intermediate",
+    "business_question": "Which categories or levels appear underrepresented or overrepresented in the catalog?",
+    "required_tables": [
+      "courses"
+    ],
+    "analytical_grain": "One category × level",
+    "expected_output": [
+      "category",
+      "level",
+      "courses",
+      "catalog_share_pct"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. All catalog courses; representation is a share of courses, not a market-demand benchmark.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.9",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CAT-10",
+    "topic": "Course Demand & Catalog",
+    "title": "Course promotion and improvement priorities",
+    "difficulty": "Advanced",
+    "business_question": "Which courses should be prioritized for promotion, improvement, or review?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "avg_rating",
+      "completion_rate_pct",
+      "recommendation"
+    ],
+    "learning_objectives": [
+      "Course Demand & Catalog",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Rule priority: low completion, low rating, otherwise promotion candidate.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "3.10",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-01",
+    "topic": "Learning Completion & Certification",
+    "title": "Overall course completion rate",
+    "difficulty": "Beginner",
+    "business_question": "What is the overall course completion rate?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One dataset snapshot",
+    "expected_output": [
+      "enrollments",
+      "completed_enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-02",
+    "topic": "Learning Completion & Certification",
+    "title": "Course completion ranking",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses have the highest and lowest completion rates?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One enrolled course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include all statuses; return the complete ranking so both extremes are visible.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-03",
+    "topic": "Learning Completion & Certification",
+    "title": "Completion by category and level",
+    "difficulty": "Intermediate",
+    "business_question": "Which categories and levels have the best completion outcomes?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One category × level",
+    "expected_output": [
+      "category",
+      "level",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-04",
+    "topic": "Learning Completion & Certification",
+    "title": "High enrollment with low completion",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses have high enrollment but low completion?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-05",
+    "topic": "Learning Completion & Certification",
+    "title": "Low enrollment with high completion",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses have low enrollment but high completion?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-06",
+    "topic": "Learning Completion & Certification",
+    "title": "Time from enrollment to completion",
+    "difficulty": "Advanced",
+    "business_question": "How long does it typically take from enrollment to completion when both dates are available?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One dated-completion summary",
+    "expected_output": [
+      "dated_completions",
+      "avg_days_to_complete",
+      "median_days_to_complete"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Only 100% completed enrollments with non-null, non-negative elapsed dates. Do not impute dates.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-07",
+    "topic": "Learning Completion & Certification",
+    "title": "Completion by plan type",
+    "difficulty": "Intermediate",
+    "business_question": "Does learner plan type correlate with completion?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One plan type",
+    "expected_output": [
+      "plan_type",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-08",
+    "topic": "Learning Completion & Certification",
+    "title": "Completion by acquisition source",
+    "difficulty": "Intermediate",
+    "business_question": "Does acquisition source correlate with completion?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source",
+    "expected_output": [
+      "acquisition_source",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.8",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-09",
+    "topic": "Learning Completion & Certification",
+    "title": "Cities with high or low completion",
+    "difficulty": "Intermediate",
+    "business_question": "Which cities have unusually high or low completion rates?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One student city",
+    "expected_output": [
+      "city",
+      "enrollments",
+      "learners",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Return every city ranked by enrollment count; interpret extremes with their sample size.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.9",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "CMP-10",
+    "topic": "Learning Completion & Certification",
+    "title": "Learner and course segments needing improvement",
+    "difficulty": "Intermediate",
+    "business_question": "What learner/course segments should be targeted for completion improvement?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One plan × category",
+    "expected_output": [
+      "plan_type",
+      "category",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Learning Completion & Certification",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; lowest completion first.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "4.10",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-01",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Overall quiz scores and pass rate",
+    "difficulty": "Beginner",
+    "business_question": "What is the overall quiz average score and pass rate?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One quiz-attempt summary",
+    "expected_output": [
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-02",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Assessment outcomes by course",
+    "difficulty": "Intermediate",
+    "business_question": "How do scores and pass rates vary by course?",
+    "required_tables": [
+      "courses",
+      "quiz_results"
+    ],
+    "analytical_grain": "One course; quiz-attempt outcomes",
+    "expected_output": [
+      "course_id",
+      "title",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-03",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Most difficult quiz numbers",
+    "difficulty": "Intermediate",
+    "business_question": "Which quiz numbers are most difficult?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One quiz sequence number",
+    "expected_output": [
+      "quiz_number",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Difficulty proxy = lowest observed pass rate, aggregated across courses.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-04",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Performance across quiz sequence",
+    "difficulty": "Intermediate",
+    "business_question": "Does performance decline or improve across quiz numbers?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One quiz sequence number",
+    "expected_output": [
+      "quiz_number",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Sequence comparison is cross-sectional; it does not measure the same learners over time.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-05",
+    "topic": "Quiz & Assessment Performance",
+    "title": "How often learners retry quizzes",
+    "difficulty": "Intermediate",
+    "business_question": "How often do learners retry quizzes?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One quiz-attempt summary",
+    "expected_output": [
+      "attempts",
+      "retry_attempts",
+      "retry_rate_pct",
+      "retrying_learners"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Retry rate = attempts numbered >1 / all attempts; not a percentage of learners.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-06",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Score change after a quiz retry",
+    "difficulty": "Advanced",
+    "business_question": "Does a retry improve the score on average?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One paired-retry summary",
+    "expected_output": [
+      "retried_quizzes",
+      "avg_score_change"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Pair by enrollment_id + quiz_number; average later attempts per quiz before comparing with first attempt. Association, not causal improvement.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-07",
+    "topic": "Quiz & Assessment Performance",
+    "title": "First-attempt versus retry pass rate",
+    "difficulty": "Intermediate",
+    "business_question": "What is the first-attempt pass rate versus later-attempt pass rate?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One attempt group",
+    "expected_output": [
+      "attempt_group",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-08",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Strong completion with weak quiz outcomes",
+    "difficulty": "Advanced",
+    "business_question": "Which courses have unusually low quiz performance despite strong completion?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "quiz_results"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Quiz strength uses the mean published-course pass rate. Aggregate enrollments and quiz attempts separately.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.8",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-09",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Strong quiz outcomes with weak completion",
+    "difficulty": "Advanced",
+    "business_question": "Which courses have strong quiz performance but weak completion?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "quiz_results"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Quiz strength uses the mean published-course pass rate. Aggregate separately to avoid fan-out.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.9",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "QIZ-10",
+    "topic": "Quiz & Assessment Performance",
+    "title": "Quiz content and difficulty review candidates",
+    "difficulty": "Intermediate",
+    "business_question": "Are there quiz numbers that may warrant content or difficulty review?",
+    "required_tables": [
+      "quiz_results"
+    ],
+    "analytical_grain": "One quiz sequence number",
+    "expected_output": [
+      "quiz_number",
+      "attempts",
+      "avg_score",
+      "pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Quiz & Assessment Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Review proxy = below the unweighted mean pass rate across quiz numbers.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "5.10",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-01",
+    "topic": "Instructor Performance",
+    "title": "Highest-rated instructors",
+    "difficulty": "Beginner",
+    "business_question": "Which instructors have the highest average ratings?",
+    "required_tables": [
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "avg_rating"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-02",
+    "topic": "Instructor Performance",
+    "title": "Actual courses managed per instructor",
+    "difficulty": "Beginner",
+    "business_question": "Which instructors manage the largest number of courses?",
+    "required_tables": [
+      "courses",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "courses"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Count actual courses; do not use the unverified stored courses_count.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-03",
+    "topic": "Instructor Performance",
+    "title": "Instructor enrollment reach",
+    "difficulty": "Intermediate",
+    "business_question": "Which instructors' courses generate the most enrollments?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "courses",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-04",
+    "topic": "Instructor Performance",
+    "title": "Instructor ratings and course demand",
+    "difficulty": "Intermediate",
+    "business_question": "How do instructor ratings relate to course demand?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "avg_rating",
+      "courses",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include instructors with no recorded courses/enrollments; discuss associations in notes.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-05",
+    "topic": "Instructor Performance",
+    "title": "Expertise areas and learning outcomes",
+    "difficulty": "Intermediate",
+    "business_question": "How do instructor expertise areas compare on enrollment and learner outcomes?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor expertise",
+    "expected_output": [
+      "expertise",
+      "courses",
+      "enrollments",
+      "completion_rate_pct",
+      "certification_rate_pct"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-06",
+    "topic": "Instructor Performance",
+    "title": "Instructor completion performance",
+    "difficulty": "Advanced",
+    "business_question": "Are some instructors associated with unusually high or low completion rates across their courses?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Enrollment-weighted completion across all courses; round at final aggregation.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-07",
+    "topic": "Instructor Performance",
+    "title": "Strong instructor quality with limited reach",
+    "difficulty": "Intermediate",
+    "business_question": "Which instructors appear to have strong quality but limited course reach?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "avg_rating",
+      "courses",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Quality proxy = rating above instructor mean; limited reach = enrollment count below instructor mean.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "INS-08",
+    "topic": "Instructor Performance",
+    "title": "Instructor support and capacity priorities",
+    "difficulty": "Advanced",
+    "business_question": "Where might instructor support, content review, or capacity balancing be useful?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "courses",
+      "enrollments",
+      "completion_rate_pct",
+      "recommendation"
+    ],
+    "learning_objectives": [
+      "Instructor Performance",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Rule priority: no courses, below-mean completion, above-mean course load, otherwise monitor. This is a review proxy.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "6.8",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-01",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Enrollments across listed price points",
+    "difficulty": "Beginner",
+    "business_question": "How is enrollment distributed across price points?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published price point",
+    "expected_output": [
+      "price_idr",
+      "enrollments"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-02",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Potential gross booking value by course",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses generate the highest potential gross booking value using `price_idr × enrollment count`?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "price_idr",
+      "enrollments",
+      "potential_booking_value_idr"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Potential booking value = listed price × recorded enrollments. Not confirmed revenue.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-03",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Potential booking value by category",
+    "difficulty": "Intermediate",
+    "business_question": "Which categories have the highest potential booking value?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published category",
+    "expected_output": [
+      "category",
+      "enrollments",
+      "potential_booking_value_idr"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. No payment, refund or discount data; booking value is a listed-price proxy.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-04",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Price and enrollment association",
+    "difficulty": "Intermediate",
+    "business_question": "Do higher-priced courses have lower or higher enrollment?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published price point",
+    "expected_output": [
+      "price_idr",
+      "courses",
+      "enrollments",
+      "avg_enrollments_per_course"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Report average enrollments per course so differing catalog sizes do not distort demand.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-05",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Pricing, completion and quiz outcomes",
+    "difficulty": "Advanced",
+    "business_question": "Does price appear associated with completion or quiz outcomes?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "quiz_results"
+    ],
+    "analytical_grain": "One published price point",
+    "expected_output": [
+      "price_idr",
+      "enrollments",
+      "completion_rate_pct",
+      "avg_quiz_score",
+      "quiz_pass_rate_pct"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Aggregate quiz and enrollment grains separately; no causal pricing claim.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-06",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "High demand, rating and potential value",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses combine strong demand, strong rating, and high potential booking value?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "avg_rating",
+      "potential_booking_value_idr"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Potential value is not actual revenue.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "PRC-07",
+    "topic": "Pricing & Commercial Analysis",
+    "title": "Pricing and packaging review candidates",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses may be candidates for pricing or packaging review?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "price_idr",
+      "enrollments",
+      "avg_rating",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Pricing & Commercial Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Review proxy = above-mean price and below-mean demand; not evidence that price causes low demand.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "7.7",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-01",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Enrollment cohort completion and certification",
+    "difficulty": "Intermediate",
+    "business_question": "How do enrollment cohorts differ in completion and certification?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One monthly enrollment cohort",
+    "expected_output": [
+      "enrollment_cohort",
+      "enrollments",
+      "completion_rate_pct",
+      "certification_rate_pct"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Recent cohorts have less observation time; compare descriptively.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-02",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Registration cohort engagement and outcomes",
+    "difficulty": "Intermediate",
+    "business_question": "Which registration cohorts produce the strongest engagement or learning outcomes?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One yearly registration cohort",
+    "expected_output": [
+      "registration_cohort",
+      "students",
+      "enrollments",
+      "avg_completion_pct",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Engagement proxy = recorded enrollments; include registered students without enrollments.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-03",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Course creation timing and observed demand",
+    "difficulty": "Intermediate",
+    "business_question": "How has course creation timing affected observable demand?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One creation year × course status",
+    "expected_output": [
+      "creation_year",
+      "status",
+      "courses",
+      "avg_enrollments_per_course"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Course ages and observation windows differ; creation date does not establish a causal effect.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-04",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Seasonal enrollment and quiz activity",
+    "difficulty": "Intermediate",
+    "business_question": "Are there seasonal patterns in enrollment or quiz activity?",
+    "required_tables": [
+      "enrollments",
+      "quiz_results"
+    ],
+    "analytical_grain": "One month of year",
+    "expected_output": [
+      "month_of_year",
+      "enrollments",
+      "quiz_attempts"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Aggregate across all observed years; partial years and coverage may distort apparent seasonality.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-05",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Learner recency across enrollment cohorts",
+    "difficulty": "Intermediate",
+    "business_question": "How does learner recency (`last_accessed`) vary across cohorts?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One monthly enrollment cohort",
+    "expected_output": [
+      "enrollment_cohort",
+      "as_of_date",
+      "enrollments",
+      "avg_days_since_access"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Recency anchor is MAX(last_accessed) in the dataset, not today.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "COH-06",
+    "topic": "Cohort & Temporal Analysis",
+    "title": "Cohorts showing disengagement signals",
+    "difficulty": "Advanced",
+    "business_question": "Which cohorts show signs of disengagement based on completion and last access?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One monthly enrollment cohort",
+    "expected_output": [
+      "enrollment_cohort",
+      "as_of_date",
+      "enrollments",
+      "at_risk_enrollments",
+      "at_risk_rate_pct"
+    ],
+    "learning_objectives": [
+      "Cohort & Temporal Analysis",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At-risk proxy = incomplete AND last access >90 days before dataset MAX(last_accessed). Not a diagnosis.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "8.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "RSK-01",
+    "topic": "Engagement & At-Risk Learners",
+    "title": "Low-completion enrollment population",
+    "difficulty": "Beginner",
+    "business_question": "How many enrollments have low completion percentages?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One enrollment summary",
+    "expected_output": [
+      "enrollments",
+      "low_completion_enrollments",
+      "low_completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Engagement & At-Risk Learners",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Low completion is explicitly defined as completion_pct <25, including zero.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "9.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "RSK-02",
+    "topic": "Engagement & At-Risk Learners",
+    "title": "Courses with partially completed enrollments",
+    "difficulty": "Intermediate",
+    "business_question": "Which courses have the largest populations of partially completed enrollments?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "partially_completed_enrollments"
+    ],
+    "learning_objectives": [
+      "Engagement & At-Risk Learners",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Partially completed means 0 < completion_pct <100.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "9.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "RSK-03",
+    "topic": "Engagement & At-Risk Learners",
+    "title": "Learner segments with the lowest completion",
+    "difficulty": "Intermediate",
+    "business_question": "Which learner segments show the lowest completion?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source × plan",
+    "expected_output": [
+      "acquisition_source",
+      "plan_type",
+      "enrollments",
+      "learners",
+      "avg_completion_pct",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Engagement & At-Risk Learners",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; sort completion ascending.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "9.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "RSK-04",
+    "topic": "Engagement & At-Risk Learners",
+    "title": "Define an explicit at-risk learner proxy",
+    "difficulty": "Advanced",
+    "business_question": "Can a practical at-risk proxy be created using `completion_pct` and `last_accessed`?",
+    "required_tables": [
+      "enrollments"
+    ],
+    "analytical_grain": "One risk-proxy group",
+    "expected_output": [
+      "as_of_date",
+      "at_risk_proxy",
+      "enrollments",
+      "learners",
+      "avg_completion_pct"
+    ],
+    "learning_objectives": [
+      "Engagement & At-Risk Learners",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At risk = completion_pct <100 AND last_accessed more than 90 days before MAX(last_accessed). Learners may occur in both groups.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "9.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "RSK-05",
+    "topic": "Engagement & At-Risk Learners",
+    "title": "Re-engagement intervention targets",
+    "difficulty": "Advanced",
+    "business_question": "Which courses or segments should receive re-engagement interventions?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One course × acquisition source × plan",
+    "expected_output": [
+      "course_id",
+      "title",
+      "acquisition_source",
+      "plan_type",
+      "at_risk_enrollments"
+    ],
+    "learning_objectives": [
+      "Engagement & At-Risk Learners",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Return the top 100 groups by at-risk enrollment count. Break ties by course_id, acquisition_source, plan_type. Same explicit >90-day incomplete proxy.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "9.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-01",
+    "topic": "Strategic Questions",
+    "title": "Categories to prioritize for growth",
+    "difficulty": "Advanced",
+    "business_question": "Which course categories should SKILLAJU prioritize for growth?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published category",
+    "expected_output": [
+      "category",
+      "enrollments",
+      "completion_rate_pct",
+      "potential_booking_value_idr"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Evidence scorecard ranked by completion then demand; record justified recommendations in notes. Potential value is not revenue.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.1",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-02",
+    "topic": "Strategic Questions",
+    "title": "Improve courses before further promotion",
+    "difficulty": "Advanced",
+    "business_question": "Which courses should be improved before additional promotion?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "avg_rating",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Review candidates have high demand and either low completion or low rating.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.2",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-03",
+    "topic": "Strategic Questions",
+    "title": "Targeted acquisition and retention segments",
+    "difficulty": "Advanced",
+    "business_question": "Which learner segments deserve targeted acquisition or retention efforts?",
+    "required_tables": [
+      "enrollments",
+      "students"
+    ],
+    "analytical_grain": "One acquisition source × plan",
+    "expected_output": [
+      "acquisition_source",
+      "plan_type",
+      "enrollments",
+      "completion_rate_pct",
+      "certification_rate_pct",
+      "recommendation"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At least 30 enrollments; above/equal mean segment completion → acquisition candidate; otherwise retention support.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.3",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-04",
+    "topic": "Strategic Questions",
+    "title": "Largest gaps between demand and learning success",
+    "difficulty": "Advanced",
+    "business_question": "Where are the largest gaps between demand and learning success?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One published course",
+    "expected_output": [
+      "course_id",
+      "title",
+      "enrollments",
+      "completion_rate_pct",
+      "incomplete_enrollments"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Gap = actual incomplete enrollment count, rather than a difference between incompatible units.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.4",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-05",
+    "topic": "Strategic Questions",
+    "title": "Strategic instructor and expertise strengths",
+    "difficulty": "Advanced",
+    "business_question": "Which instructors or expertise areas are strategic strengths?",
+    "required_tables": [
+      "courses",
+      "enrollments",
+      "instructors"
+    ],
+    "analytical_grain": "One instructor",
+    "expected_output": [
+      "instructor_id",
+      "name",
+      "expertise",
+      "avg_rating",
+      "enrollments",
+      "completion_rate_pct"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Strength proxy = at/above mean instructor rating and completion. Use expertise labels as context.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.5",
+    "source_file": "docs/skillaju_business_questions.md"
+  },
+  {
+    "id": "STR-06",
+    "topic": "Strategic Questions",
+    "title": "Three evidence-based priority actions",
+    "difficulty": "Advanced",
+    "business_question": "What three actions are most likely to improve enrollment, completion, or learner quality based on the evidence?",
+    "required_tables": [
+      "courses",
+      "enrollments"
+    ],
+    "analytical_grain": "One proposed priority action",
+    "expected_output": [
+      "priority",
+      "action",
+      "target",
+      "affected_enrollments"
+    ],
+    "learning_objectives": [
+      "Strategic Questions",
+      "PostgreSQL result interpretation",
+      "Respect analytical grain"
+    ],
+    "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. A deterministic planning baseline, not a causal forecast: lowest completion course, highest demand course, and at-risk population. Explain alternatives and limitations in notes.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "source_question": "10.6",
+    "source_file": "docs/skillaju_business_questions.md"
+  }
+]
