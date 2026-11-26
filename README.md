@@ -62,10 +62,10 @@ Validation checks exact output aliases and column order, normalizes numbers to s
 
 ## Deploy
 
-GitHub Actions packages only `index.html`, `config.js`, `exercises.json` and `.nojekyll` into the Pages artifact. Backend source, reference SQL, CSVs and credentials are excluded from that artifact. Pages uses the `main` branch Actions workflow.
+GitHub Actions packages only `index.html`, `config.js`, `api-client.js`, `exercises.json` and `.nojekyll` into the Pages artifact. Backend source, reference SQL, CSVs and credentials are excluded from that artifact. Pages uses the `main` branch Actions workflow.
 
 Render runs `gunicorn server:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 35`. Set `DATABASE_URL` through Render secret environment variables to the reader connection, `REQUIRE_NON_SUPERUSER=true` and `CORS_ALLOWED_ORIGINS=https://subhanaristiadi.github.io`. `/ready` is fast liveness; `/health` verifies actual database connectivity and role privileges.
 
-The service is managed directly through Render. `render.yaml` is a reproducible Blueprint alternative, not a second deployment to apply in parallel. Credentials remain only in Neon/Render secret storage. Render Free can sleep when idle, so the first API request may take about a minute; the exercise list loads independently from Pages.
+The service is managed directly through Render. `render.yaml` is a reproducible Blueprint alternative, not a second deployment to apply in parallel. Credentials remain only in Neon/Render secret storage. Render Free can sleep when idle, so the first API request may take about a minute; the exercise list loads independently from Pages. The page quietly warms the service through `/ready`. Requests retry transient connection failures up to three times within one 90-second timeout. SQL errors and rate limits are reported immediately beside the query; an initial connection failure does not display a permanent header warning.
 
 Original UI reference revision: `269ac04b611487a0b70e5884b6e20dbb8ef72f4a`. Existing CSVs and original Skillaju SQL analysis files are preserved.
