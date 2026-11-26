@@ -18,8 +18,8 @@ def main():
     with conn.cursor() as cur:
         cur.execute("SELECT current_user,current_setting('transaction_read_only')")
         print('Reader:',cur.fetchone(),flush=True)
-        cur.execute("SELECT has_table_privilege(current_user,'public.students','SELECT'),has_table_privilege(current_user,'public.instructors','SELECT')")
-        assert cur.fetchone()==(False,False),'Reader can access private identities'
+        cur.execute("SELECT has_table_privilege(current_user,c.oid,'SELECT') FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname IN ('students','instructors')")
+        assert cur.fetchall()==[(False,),(False,)],'Reader can access private identities'
         cur.execute("SELECT COUNT(*) FROM lab.students WHERE email NOT LIKE '%@example.invalid' OR name NOT LIKE 'Learner %'")
         assert cur.fetchone()[0]==0,'Practice identities are not anonymous'
         conn.rollback()
