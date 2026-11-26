@@ -143,18 +143,20 @@ def execute_query(sql: str) -> dict[str, Any]:
             cur.execute("SELECT set_config('statement_timeout', %s, true)", (f"{QUERY_TIMEOUT_MS}ms",))
             cur.execute("SELECT set_config('lock_timeout', %s, true)", (f"{LOCK_TIMEOUT_MS}ms",))
             cur.execute("SELECT set_config('idle_in_transaction_session_timeout', %s, true)", (f"{QUERY_TIMEOUT_MS + 2000}ms",))
+        # Fetch only the preview from PostgreSQL; a client cursor would first
+        # buffer the entire result, even when fetchmany() displays just 500 rows.
+        with conn.cursor(name='skillaju_query') as cur:
             cur.execute(normalized)
+            raw_rows = cur.fetchmany(MAX_ROWS + 1)
             if cur.description is None:
                 raise ValueError("The statement did not return a result set. Submit a SELECT query.")
             columns = [d.name for d in cur.description]
-            raw_rows = cur.fetchmany(MAX_ROWS + 1)
             truncated = len(raw_rows) > MAX_ROWS
             raw_rows = raw_rows[:MAX_ROWS]
             rows = [[json_safe(value) for value in row] for row in raw_rows]
             payload = json.dumps({"columns": columns, "rows": rows}, ensure_ascii=False, default=str)
             if len(payload.encode("utf-8")) > MAX_RESULT_BYTES:
                 raise ValueError("Result payload is too large. Select fewer columns or rows.")
-            conn.rollback()
             return {"columns": columns, "rows": rows, "row_count": len(rows), "column_count": len(columns), "truncated": truncated, "duration_ms": round((time.perf_counter()-started)*1000, 2), "normalized_sql": normalized}
     finally:
         try: conn.rollback()

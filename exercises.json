@@ -26,7 +26,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "1.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -50,7 +50,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "1.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -75,7 +75,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "1.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -103,7 +103,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Compare completion-rate range across plan, source, city, category and level.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "1.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -131,7 +131,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Use the category scorecard as evidence; discuss strengths and weaknesses in personal notes.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "1.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -155,7 +155,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -180,7 +180,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -209,7 +209,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -238,7 +238,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -264,7 +264,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -292,7 +292,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Age bands: 18–24, 25–34, 35–45.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -321,7 +321,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; rank by completion then certification.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -350,7 +350,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Active proxy = above-mean enrollment count; under-completing = below-mean segment completion rate. Activity frequency is unavailable.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "2.8",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -376,7 +376,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Rank the top 10 by recorded enrollments; break ties by course_id.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -402,7 +402,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Bottom 10 published courses including zero enrollments; break ties by course_id.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -428,7 +428,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -454,7 +454,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -482,7 +482,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Compare course-level listed price, duration and recorded enrollments; discuss associations in notes.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -509,7 +509,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -536,7 +536,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -563,7 +563,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include both draft and published courses. Attribute differences alone do not establish causation.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.8",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -589,7 +589,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. All catalog courses; representation is a share of courses, not a market-demand benchmark.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.9",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -618,7 +618,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Rule priority: low completion, low rating, otherwise promotion candidate.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "3.10",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -643,7 +643,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -670,7 +670,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include all statuses; return the complete ranking so both extremes are visible.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -697,7 +697,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -724,7 +724,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -751,7 +751,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -776,7 +776,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Only 100% completed enrollments with non-null, non-negative elapsed dates. Do not impute dates.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -805,7 +805,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -834,7 +834,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.8",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -863,7 +863,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Return every city ranked by enrollment count; interpret extremes with their sample size.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.9",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -891,7 +891,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; lowest completion first.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "4.10",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -916,7 +916,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -944,7 +944,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -970,7 +970,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Difficulty proxy = lowest observed pass rate, aggregated across courses.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -996,7 +996,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Sequence comparison is cross-sectional; it does not measure the same learners over time.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1022,7 +1022,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Retry rate = attempts numbered >1 / all attempts; not a percentage of learners.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1046,7 +1046,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Pair by enrollment_id + quiz_number; average later attempts per quiz before comparing with first attempt. Association, not causal improvement.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1072,7 +1072,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1103,7 +1103,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Quiz strength uses the mean published-course pass rate. Aggregate enrollments and quiz attempts separately.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.8",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1134,7 +1134,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Quiz strength uses the mean published-course pass rate. Aggregate separately to avoid fan-out.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.9",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1160,7 +1160,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Review proxy = below the unweighted mean pass rate across quiz numbers.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "5.10",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1185,7 +1185,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1211,7 +1211,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Count actual courses; do not use the unverified stored courses_count.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1239,7 +1239,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1268,7 +1268,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Include instructors with no recorded courses/enrollments; discuss associations in notes.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1297,7 +1297,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1325,7 +1325,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Enrollment-weighted completion across all courses; round at final aggregation.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1354,7 +1354,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Quality proxy = rating above instructor mean; limited reach = enrollment count below instructor mean.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1384,7 +1384,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Rule priority: no courses, below-mean completion, above-mean course load, otherwise monitor. This is a review proxy.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "6.8",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1409,7 +1409,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. ",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1437,7 +1437,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Potential booking value = listed price × recorded enrollments. Not confirmed revenue.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1463,7 +1463,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. No payment, refund or discount data; booking value is a listed-price proxy.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1490,7 +1490,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Report average enrollments per course so differing catalog sizes do not distort demand.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1519,7 +1519,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Aggregate quiz and enrollment grains separately; no causal pricing claim.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1547,7 +1547,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Potential value is not actual revenue.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1576,7 +1576,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Review proxy = above-mean price and below-mean demand; not evidence that price causes low demand.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "7.7",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1602,7 +1602,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Recent cohorts have less observation time; compare descriptively.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1630,7 +1630,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Engagement proxy = recorded enrollments; include registered students without enrollments.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1657,7 +1657,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Course ages and observation windows differ; creation date does not establish a causal effect.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1683,7 +1683,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Aggregate across all observed years; partial years and coverage may distort apparent seasonality.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1709,7 +1709,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Recency anchor is MAX(last_accessed) in the dataset, not today.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1736,7 +1736,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At-risk proxy = incomplete AND last access >90 days before dataset MAX(last_accessed). Not a diagnosis.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "8.6",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1761,7 +1761,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Low completion is explicitly defined as completion_pct <25, including zero.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "9.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1787,7 +1787,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Partially completed means 0 < completion_pct <100.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "9.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1816,7 +1816,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Require at least 30 enrollments; sort completion ascending.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "9.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1843,7 +1843,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At risk = completion_pct <100 AND last_accessed more than 90 days before MAX(last_accessed). Learners may occur in both groups.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "9.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1872,7 +1872,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Return the top 100 groups by at-risk enrollment count. Break ties by course_id, acquisition_source, plan_type. Same explicit >90-day incomplete proxy.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "9.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1899,7 +1899,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Evidence scorecard ranked by completion then demand; record justified recommendations in notes. Potential value is not revenue.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.1",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1927,7 +1927,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Catalog recommendations include published courses only. High/low means above/below the unweighted mean of published course metrics, unless another rule is stated. Review candidates have high demand and either low completion or low rating.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.2",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1956,7 +1956,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. At least 30 enrollments; above/equal mean segment completion → acquisition candidate; otherwise retention support.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.3",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -1984,7 +1984,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Gap = actual incomplete enrollment count, rather than a difference between incompatible units.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.4",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -2014,7 +2014,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. Strength proxy = at/above mean instructor rating and completion. Use expertise labels as context.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.5",
     "source_file": "docs/skillaju_business_questions.md"
   },
@@ -2041,7 +2041,7 @@
       "Respect analytical grain"
     ],
     "limitations": "Completion = completion_pct = 100; certification = certificate_issued; rates are percentages rounded to 2 decimals. Counts use supplied enrollment rows, not courses.total_enrolled. Observational associations are not causal. A deterministic planning baseline, not a causal forecast: lowest completion course, highest demand course, and at-risk population. Explain alternatives and limitations in notes.",
-    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.",
+    "validation_policy": "Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.",
     "source_question": "10.6",
     "source_file": "docs/skillaju_business_questions.md"
   }

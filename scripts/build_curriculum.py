@@ -190,7 +190,7 @@ def main():
         tables=sorted({t.name for t in tree.find_all(exp.Table)} & {'students','courses','instructors','enrollments','quiz_results'})
         outputs=tree.named_selects
         assert outputs and '*' not in outputs,(eid,outputs)
-        exercises.append(dict(id=eid,topic=topic,title=spec['title'],difficulty=spec['difficulty'],business_question=question,required_tables=tables,analytical_grain=spec['grain'],expected_output=outputs,learning_objectives=[topic,'PostgreSQL result interpretation','Respect analytical grain'],limitations=BASE_NOTE+' '+spec['note'],validation_policy='Use exact column aliases and column order; row order is ignored. Numeric tolerance: 0.000001. Match the stated filters and baseline definitions.',source_question=f'{number}.{qnum}',source_file='docs/skillaju_business_questions.md'))
+        exercises.append(dict(id=eid,topic=topic,title=spec['title'],difficulty=spec['difficulty'],business_question=question,required_tables=tables,analytical_grain=spec['grain'],expected_output=outputs,learning_objectives=[topic,'PostgreSQL result interpretation','Respect analytical grain'],limitations=BASE_NOTE+' '+spec['note'],validation_policy='Use exact column aliases and column order; row order is ignored. Numbers are normalized to six decimal places. Match the stated filters and baseline definitions.',source_question=f'{number}.{qnum}',source_file='docs/skillaju_business_questions.md'))
         refs[eid]=dict(sql=spec['sql'],policy=dict(compare_column_names=True,order_matters=False))
     (ROOT/'exercises.json').write_text(json.dumps(exercises,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     (ROOT/'reference_queries.json').write_text(json.dumps(refs,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
